@@ -7,12 +7,21 @@
    <h2>Get Valorant Stats from Henrik-3's API</h2>
    <h3>You need an API key (works without it but less usage)</h3>
    <h3><b>Compatible with TypeScript</b></h3>
-   <h4>This module was inspired by <a href="https://www.npmjs.com/package/unofficial-valorant-api">Unofficial Valorant API</a> by <a href="https://github.com/Henrik-3">Henrik-3</a></h4>
+   <h4>This package/module was inspired by <a href="https://www.npmjs.com/package/unofficial-valorant-api">Unofficial Valorant API</a> by <a href="https://github.com/Henrik-3">Henrik-3</a></h4>
 </div>
 
 To install use:
+NPM
 ```shell
 npm i stinger.js
+```
+Yarn
+```shell
+yarn add stinger.js
+```
+PNPM
+```shell
+pnpm install stinger.js
 ```
 
 
