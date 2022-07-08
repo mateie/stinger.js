@@ -10,16 +10,17 @@
    <h4>This package/module was inspired by <a href="https://www.npmjs.com/package/unofficial-valorant-api">Unofficial Valorant API</a> by <a href="https://github.com/Henrik-3">Henrik-3</a></h4>
 </div>
 
-Installations:<br/>
-NPM
+Installations:
+
+<i><b>NPM</b></i>
 ```shell
 npm i stinger.js
 ```
-Yarn
+<i><b>Yarn</i></b>
 ```shell
 yarn add stinger.js
 ```
-PNPM
+<i><b>PNPM</i></b>
 ```shell
 pnpm install stinger.js
 ```
