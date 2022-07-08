@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        "target": "ES2022", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+        "module": "commonjs", /* Specify what module code is generated. */
+        "baseUrl": "src",
+        "rootDir": "src",
+        "moduleResolution": "Node", /* Specify how TypeScript looks up a file from a given module specifier. */
+        "declarationMap": true,
+        "strict": true, /* Enable all strict type-checking options. */
+        "skipLibCheck": true, /* Skip type checking all .d.ts files. */
+        "noImplicitAny": true,
+        "declaration": true,
+		"importHelpers": true,
+		"inlineSources": true,
+		"newLine": "lf",
+		"noEmitHelpers": true,
+		"outDir": "dist",
+		"preserveConstEnums": true,
+		"removeComments": false,
+		"sourceMap": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+    },
+    "ts-node": {
+        "compilerOptions": {
+            "module": "CommonJS",
+        }
+    },
+    "include": ["src/**/*.ts", "typings/**/*.ts"],
+    "exclude": ["node_modules", "build"]
+}
