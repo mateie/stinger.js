@@ -5,32 +5,55 @@ declare module 'stinger.js' {
         body?: any;
     }
 
-    export interface AccountOptions {
+    // Parameters
+    export interface IAccount {
         name: string;
         tag: string;
+        region?: Regions;
     }
 
-    export interface MMROptions extends AccountOptions {
-        region: Region;
-        version?: 'v1' | 'v2';
-        filter?: Episodes;
-    };
+    export interface IGetAccount extends IAccount {
+        force?: boolean;
+    }
 
-    export interface PUUID {
+    export interface IGetMMR extends IAccount {
+        region: Regions;
+        filter?: Episodes;
+    }
+
+    export interface IPUUID {
         puuid: string;
     }
 
+    export interface IGetMMRPUUID extends IPUUID {
+        region: Regions;
+        filter?: Episodes;
+    }
+
+    // Responses
     export interface APIResponse {
         status: number;
-        data: AccountInfo | null;
+        data: any;
         rateLimits: RateLimit;
         error: ErrorObject | null;
         url: string;
     }
 
-    export interface AccountInfo extends AccountOptions {
+    export interface AccountResponse extends APIResponse {
+        data: AccountInfo;
+    }
+
+    export interface MMRResponse extends APIResponse {
+        data: MMRInfo;
+    }
+
+    export interface MMRHistoryResponse extends APIResponse {
+        data: [MMRHistory];
+    }
+
+    // Data Structures
+    export interface AccountInfo extends IGetAccount {
         puuid: string;
-        region: Regions,
         account_level: number;
         card: {
             small: string;
@@ -40,7 +63,47 @@ declare module 'stinger.js' {
         };
         last_update: string;
     }
-    
+
+    export interface MMRInfo extends IAccount {
+        puuid: string;
+        current_data: MMR;
+        by_season: Record<Episodes, IBySeason>;
+    }
+
+    export interface MMRBase {
+        currenttier: number;
+        currenttierpatched: string;
+        ranking_in_tier: number;
+        mmr_change_to_last_game: number;
+        elo: number;
+    }
+
+    export interface MMR extends MMRBase {
+        games_needed_for_rating: number;
+        old: boolean;
+    }
+
+    export interface MMRHistory extends MMRBase {
+        date: string;
+        date_raw: number;
+    }
+
+    export interface IBySeason {
+        wins: number;
+        number_of_games: number;
+        final_rank: number;
+        final_rank_patched: string;
+        act_rank_wins: [IActRankWins];
+        old: boolean;
+        error?: string;
+    }
+
+    export interface IActRankWins {
+        patched_tier: string;
+        tier: number;
+    }
+
+    // Etc
     export interface ErrorObject {
         message: string;
     }
@@ -51,7 +114,8 @@ declare module 'stinger.js' {
         reset: number;
     }
 
-    export enum Episodes {
+    // Enums
+    export enum EEpisodes {
         Episode1Act1 = 'e1a1',
         Episode1Act2 = 'e1a2',
         Episode1Act3 = 'e1a3',
@@ -136,17 +200,7 @@ declare module 'stinger.js' {
         MatchHistory = 'matchhistory',
     }
 
-    export enum MMRVersions {
-        Version1 = 'v1',
-        Version2 = 'v2',
-    }
-
-    export enum LeaderboardVersions {
-        Version1 = 'v1',
-        Version2 = 'v2',
-    }
-
-    export enum Regions {
+    export enum ERegions {
         Europe = 'eu',
         NorthAmerica = 'na',
         Korea = 'kr',
@@ -154,4 +208,23 @@ declare module 'stinger.js' {
         LatinAmerica = 'latam',
         Brazil = 'br',
     }
+
+    // Types
+    export type Episodes = 'e1a1' |
+        'e1a2' |
+        'e1a3' |
+        'e2a1' |
+        'e2a2' |
+        'e2a3' |
+        'e3a1' |
+        'e3a2' |
+        'e3a3' |
+        'e4a1' |
+        'e4a2' |
+        'e4a3' |
+        'e5a1' |
+        'e5a2' |
+        'e5a3';
+    
+    export type Regions = 'eu' | 'na' | 'kr' | 'ap' | 'latam' | 'br';
 }
