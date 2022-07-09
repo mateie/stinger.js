@@ -1,4 +1,33 @@
 declare module 'stinger.js' {
+
+    // Base
+    export class StingerJS {
+        private readonly token?: string;
+        constructor(token?: string): StingerJS;
+        private _fetch({ url, type, body = null }: FetchOptions): Promise<APIResponse>;
+        private _parseBody(body: any): any;
+        private _parseResponse(req: any): APIResponse;
+        private _query(input: any): URLSearchParams | null;
+        public getAccount({ name, tag, force }: IGetAccount): Promise<AccountResponse>
+        public getMMR({ name, tag, region, filter }: IGetMMR): Promise<MMRResponse>;
+        public getMMRByPUUID({ puuid, region }: IGetMMRPUUID): Promise<MMRResponse>;
+        public getMMRHistory({ name, tag, region }: IAccount): Promise<MMRHistoryResponse>;
+    }
+
+    export interface StingerJS {
+        private readonly token?: string;
+        new(token?: string): StingerJS;
+        private _fetch({ url, type, body = null }: FetchOptions): Promise<APIResponse>;
+        private _parseBody(body: any): any;
+        private _parseResponse(req: any): APIResponse;
+        private _query(input: any): URLSearchParams | null;
+        public getAccount({ name, tag, force }: IGetAccount): Promise<AccountResponse>
+        public getMMR({ name, tag, region, filter }: IGetMMR): Promise<MMRResponse>;
+        public getMMRByPUUID({ puuid, region }: IGetMMRPUUID): Promise<MMRResponse>;
+        public getMMRHistory({ name, tag, region }: IAccount): Promise<MMRHistoryResponse>;
+    }
+
+    // Options
     export interface FetchOptions {
         url: string;
         type: string;
