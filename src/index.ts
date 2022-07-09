@@ -1,6 +1,6 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 
-import { AccountOptions, APIResponse, FetchOptions, MMROptions } from "stinger.js";
+import { AccountResponse, APIResponse, FetchOptions, IAccount, IGetAccount, IGetMMR, IGetMMRPUUID, MMRHistoryResponse, MMRResponse } from "stinger.js";
 
 export default class StingerJS {
     private readonly token?: string;
@@ -48,18 +48,33 @@ export default class StingerJS {
         return query.toString().length ? query : null;
     }
 
-    public async getAccount({ name, tag }: AccountOptions) {
+    public async getAccount({ name, tag, force }: IGetAccount): Promise<AccountResponse> {
+        const query = this._query({ force });
         return await this._fetch({
-            url: `https://api.henrikdev.xyz/valorant/v1/account/${encodeURI(name)}/${encodeURI(tag)}`,
+            url: `https://api.henrikdev.xyz/valorant/v2/account/${encodeURI(name)}/${encodeURI(tag)}${query ? `?${query}` : ''}`,
             type: 'GET',
         });
     }
 
-    public async getMMR({ name, tag, region, filter, version }: MMROptions) {
+    public async getMMR({ name, tag, region, filter }: IGetMMR): Promise<MMRResponse> {
         const query = this._query({ filter });
 
         return await this._fetch({
-            url: `https://api.henrikdev.xyz/valorant/${version}/mmr/${region}/${encodeURI(name)}/${encodeURI(tag)}${query ? `?${query}` : ''}`,
+            url: `https://api.henrikdev.xyz/valorant/v2/mmr/${region}/${encodeURI(name)}/${encodeURI(tag)}${query ? `?${query}` : ''}`,
+            type: 'GET',
+        });
+    }
+
+    public async getMMRByPUUID({ puuid, region }: IGetMMRPUUID) {
+        return await this._fetch({
+            url: `https://api.henrikdev.xyz/valorant/v2/by-puuid/mmr/${region}/${puuid}`,
+            type: 'GET',
+        });
+    }
+
+    public async getMMRHistory({ name, tag, region }: IAccount): Promise<MMRHistoryResponse> {
+        return await this._fetch({
+            url: `https://api.henrikdev.xyz/valorant/v2/mmr-history/${region}/${encodeURI(name)}/${encodeURI(tag)}`,
             type: 'GET',
         });
     }
