@@ -51,7 +51,7 @@ export default class StingerJS {
     public async getAccount({ name, tag, force }: IGetAccount): Promise<AccountResponse> {
         const query = this._query({ force });
         return await this._fetch({
-            url: `https://api.henrikdev.xyz/valorant/v2/account/${encodeURI(name)}/${encodeURI(tag)}${query ? `?${query}` : ''}`,
+            url: `https://api.henrikdev.xyz/valorant/v1/account/${encodeURI(name)}/${encodeURI(tag)}${query ? `?${query}` : ''}`,
             type: 'GET',
         });
     }
