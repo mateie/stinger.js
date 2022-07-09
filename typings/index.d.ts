@@ -256,4 +256,6 @@ declare module 'stinger.js' {
         'e5a3';
     
     export type Regions = 'eu' | 'na' | 'kr' | 'ap' | 'latam' | 'br';
+
+    export default StingerJS;
 }
