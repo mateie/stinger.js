@@ -65,7 +65,7 @@ export default class StingerJS {
         });
     }
 
-    public async getMMRByPUUID({ puuid, region }: IGetMMRPUUID) {
+    public async getMMRByPUUID({ puuid, region }: IGetMMRPUUID): Promise<MMRResponse> {
         return await this._fetch({
             url: `https://api.henrikdev.xyz/valorant/v2/by-puuid/mmr/${region}/${puuid}`,
             type: 'GET',
